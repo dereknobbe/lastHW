@@ -1,0 +1,117 @@
+/**
+ * The Car class represents a single element of the Train. Each Car contains an array of Objects.
+ */
+public class Car {
+    /**
+     * Array of objects stored on this Car
+     */
+    private Object[] cargo;
+
+    /**
+     * Points to the next Car in the Train if it exists, or null otherwise.
+     */
+    private Car nextCar;
+
+    /**
+     * Creates an empty Car with a cargo array of the passed size.
+     * @param size the size of the car's cargo array
+     */
+    public Car(int size) {
+        this.cargo = new Object[size];
+    }
+
+    /**
+     * Places additional objects onto this Car. Throws FullCarException if no positions in the Car are null.
+     * @param cargo Additional cargo to place on the Car
+     * @throws FullCarException if the Car is full
+     */
+    public void addCargo(Object cargo) throws FullCarException{
+        for (int i = 0; i < this.cargo.length; i++) {
+            if (this.cargo[i] == null) {
+                this.cargo[i] = cargo;
+            }
+        }
+        throw (new FullCarException("Cannot add cargo, car is full!"));
+    }
+
+    /**
+     * Returns a reference to the array of objects stored on this Car
+     * @return a reference to the array of objects stored on this Car
+     */
+    public Object[] getCargo() {
+        return this.cargo;
+    }
+
+    /**
+     * Returns the number of elements that can be stored in this Car.
+     * @return the number of elements that can be stored in this Car.
+     */
+    public int capacity() {
+        return cargo.length;
+    }
+
+    /**
+     * Returns the number of elements currently stored in this Car
+     * @return the number of elements currently stored in this Car
+     */
+    public int size() {
+        int numElements = 0;
+        for (int i = 0; i < cargo.length; i++) {
+            if (cargo[i] != null) {
+                numElements++;
+            }
+        }
+        return numElements;
+    }
+
+
+
+    /**
+     * Returns the element at the specified location in the Car.
+     * @param index the index of the element to be removed.
+     * @return the element that was removed from the car.
+     * @throws IndexOutOfBoundsException if the index is out of range (zero-based)
+     */
+    public Object get(int index) throws IndexOutOfBoundsException{
+        return cargo[index];
+    }
+
+    /**
+     * Replaces the cargo in the Car at the specified position on this Train. null is a permitted argument.
+     * @param index index of the cargo in the Car to replace
+     * @param cargo element to replace the cargo at the given location
+     * @throws IndexOutOfBoundsException if the index is out of range (zero-based)
+     */
+    public void set(int index, Object cargo) throws IndexOutOfBoundsException {
+        this.cargo[index] = cargo;
+    }
+
+    /**
+     * Returns true if each position in the cargo array is not null, and returns false otherwise.
+     * @return true if each position in the cargo array is not null, and returns false otherwise.
+     */
+    public boolean isFull() {
+        for (int i = 0; i < cargo.length ; i++) {
+            if (cargo[i] == null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Sets this Car's nextCar field to reference the passed Car
+     * @param nextCar Car for this Car to reference
+     */
+    public void setNextCar(Car nextCar){
+        this.nextCar = nextCar;
+    }
+
+    /**
+     * Returns the reference to the nextCar if it exists, or null otherwise
+     * @return the reference to the nextCar if it exists, or null otherwise
+     */
+    public Car getNextCar() {
+        return nextCar;
+    }
+}
